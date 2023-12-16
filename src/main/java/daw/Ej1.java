@@ -14,21 +14,28 @@ import javax.swing.JOptionPane;
 public class Ej1 {
 
     public static void main(String[] args) {
-
+        //Recoge el numero de palaras a introducir
         int numeroPalabras = Ej1.leerNumero();
-
+        
+        //Creamos la array palabras con el tamaño antes especificado
         String[] palabras = Ej1.generarArray(numeroPalabras);
         //Mostrar el array
         mostrarArray(palabras);
-        
-        // Crear Array con palabras > 3 vocales
-        String[] arrayTres=generarArrayTresVocales(palabras);
-        mostrarArray(arrayTres);
-        
-        //Crear Array para las palarbas con <3 vocales
-        String[] arrayDos=generarArrayDosVocales(palabras);
-        mostrarArray(arrayDos);
 
+        // Crear Array con palabras > 3 vocales
+        String[] arrayTres = generarArrayTresVocales(palabras);
+        mostrarArray(arrayTres);
+
+        //Crear Array para las palarbas con <3 vocales
+        String[] arrayDos = generarArrayDosVocales(palabras);
+        mostrarArray(arrayDos);
+        
+        //Usamos el metodo para crear una array de enteros que recoja 
+        //la posicion de una determinada letra
+        int[] arrayNumerosEntero = arrayEnteros(palabras, 'e');
+        
+        //Mostramos
+        mostrarArrayEnteros(arrayNumerosEntero);
     }
 
     //Metodo para leer el número de palabras
@@ -93,22 +100,21 @@ public class Ej1 {
                 contador++;
             }
         }
-        
+
         String[] arrayTresVocales = new String[contador];
-        
-        int posicion=0;
-        for(int i=0;i<original.length;i++){
-            if(contadorPalabras(original[i]) >= 3) {
-                arrayTresVocales[posicion++]=original[i];
-                
+
+        int posicion = 0;
+        for (int i = 0; i < original.length; i++) {
+            if (contadorPalabras(original[i]) >= 3) {
+                arrayTresVocales[posicion++] = original[i];
+
             }
         }
 
         return arrayTresVocales;
     }
-    
+
     //Metodo que devuelve otro array pero con los que tienen menos de 2
-    
     public static String[] generarArrayDosVocales(String[] original) {
 
         //Vamos a contar el numero de palabras que hay con mas de 3 vocales
@@ -118,23 +124,43 @@ public class Ej1 {
                 contador++;
             }
         }
-        
+
         String[] arrayDosVocales = new String[contador];
-        
-        int posicion=0;
-        for(int i=0;i<original.length;i++){
-            if(contadorPalabras(original[i]) < 3) {
-                arrayDosVocales[posicion++]=original[i];
-                
+
+        int posicion = 0;
+        for (int i = 0; i < original.length; i++) {
+            if (contadorPalabras(original[i]) < 3) {
+                arrayDosVocales[posicion++] = original[i];
+
             }
         }
 
         return arrayDosVocales;
     }
-    
+
     // EJERCICIO 2 
-    /*public static int[] arrayEnteros(String[] original, char letra) {
+    public static int[] arrayEnteros(String[] original, char letra) {
+        int[] arrayEnteros = new int[original.length];
+
+        for (int i = 0; i < original.length; i++) {
+            //Busca la letra y devuelve la posicion
+            int posicion = original[i].indexOf(letra);
+            //La guardamos dentro del campo de la array
+            arrayEnteros[i] = posicion;
+        }
+
+        return arrayEnteros;
+    }
+
+    //Metodo para mostar el Array de enteros
+    public static void mostrarArrayEnteros(int[] array) {
+        StringBuilder texto = new StringBuilder();
         
-        
-    }*/
+        for (int i = 0; i < array.length; i++) {
+            texto.append("En la posicion " + i + " la palabra contiene la letra"
+                    + " en la posicion " + array[i] +"\n");
+        }
+        JOptionPane.showMessageDialog(null, texto);
+    }
+
 }
